@@ -141,7 +141,13 @@ fi
 
 # Database
 if [ "$DB_yn" == 'y' ]; then
-  dbrootpwd=`head -c 100 /dev/urandom | tr -dc a-z0-9A-Z | head -c 16`
+  if [ -e "/root/account.log" && -n "`grep ^dbrootpwd /root/account.log`" ]; then
+    dbrootpwd=`cat account.log | grep ^dbrootpwd | awk '{print $3}'`
+  else
+    dbrootpwd=`head -c 100 /dev/urandom | tr -dc a-z0-9A-Z | head -c 16`
+    echo "dbrootpwd = ${dbrootpwd}" >> /root/account.log
+    chmod a-r /root/account.log
+  fi
   case "${DB_version}" in
     1)
       if [ "${dbInstallMethods}" == "2" ]; then

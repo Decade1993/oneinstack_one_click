@@ -22,7 +22,7 @@ sed -i "s@^oneinstack_dir.*@oneinstack_dir=`pwd`@" ./options.conf
 . ./include/check_dir.sh
 . ./include/download.sh
 . ./include/get_char.sh
-. ./options_one_click.txt
+. ./options_one_click.conf
 
 # Check if user is root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
@@ -141,7 +141,7 @@ fi
 
 # Database
 if [ "$DB_yn" == 'y' ]; then
-  if [ -e "/root/account.log" && -n "`grep ^dbrootpwd /root/account.log`" ]; then
+  if [ -e "/root/account.log" ] && [ -n "`grep ^dbrootpwd /root/account.log`" ]; then
     dbrootpwd=`cat /root/account.log | grep ^dbrootpwd | awk '{print $3}'`
   else
     dbrootpwd=`head -c 100 /dev/urandom | tr -dc a-z0-9A-Z | head -c 16`

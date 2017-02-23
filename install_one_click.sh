@@ -142,7 +142,7 @@ fi
 # Database
 if [ "$DB_yn" == 'y' ]; then
   if [ -e "/root/account.log" && -n "`grep ^dbrootpwd /root/account.log`" ]; then
-    dbrootpwd=`cat account.log | grep ^dbrootpwd | awk '{print $3}'`
+    dbrootpwd=`cat /root/account.log | grep ^dbrootpwd | awk '{print $3}'`
   else
     dbrootpwd=`head -c 100 /dev/urandom | tr -dc a-z0-9A-Z | head -c 16`
     echo "dbrootpwd = ${dbrootpwd}" >> /root/account.log

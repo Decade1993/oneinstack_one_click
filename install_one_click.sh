@@ -32,7 +32,7 @@ mkdir -p $wwwroot_dir/default $wwwlogs_dir
 
 # Use default SSH port 22. If you use another SSH port on your server
 if [ -e "/etc/ssh/sshd_config" ]; then
-  [ -z "`grep ^Port /etc/ssh/sshd_config`" ] || $ssh_port=`grep ^Port /etc/ssh/sshd_config | awk '{print $2}'`
+  [ -z "`grep ^Port /etc/ssh/sshd_config`" ] || ssh_port=`grep ^Port /etc/ssh/sshd_config | awk '{print $2}'`
   SSH_PORT=$ssh_port
 
   if [ -z "`grep ^Port /etc/ssh/sshd_config`" -a "$SSH_PORT" != '22' ]; then
@@ -51,13 +51,13 @@ fi
 [ "$Apache_version" != '3' -a -e "$apache_install_dir/conf/httpd.conf" ] && { echo "${CWARNING}Aapche already installed! ${CEND}"; Apache_version=Other; }
 
 # check if Tomcat has been installed
-[ "$Tomcat_version" != '3' -a -e "$tomcat_install_dir/conf/server.xml" ] && { echo "${CWARNING}Tomcat already installed! ${CEND}" ; $Tomcat_version=Other; }
+[ "$Tomcat_version" != '3' -a -e "$tomcat_install_dir/conf/server.xml" ] && { echo "${CWARNING}Tomcat already installed! ${CEND}" ; Tomcat_version=Other; }
 
 # check if Database has been installed
-[ -d "$db_install_dir/support-files" ] && { echo "${CWARNING}Database already installed! ${CEND}"; $DB_yn=Other; }
+[ -d "$db_install_dir/support-files" ] && { echo "${CWARNING}Database already installed! ${CEND}"; DB_yn=Other; }
 
 # check if PHP has been installed
-[ -e "$php_install_dir/bin/phpize" ] && { echo "${CWARNING}PHP already installed! ${CEND}"; $PHP_yn=Other; }
+[ -e "$php_install_dir/bin/phpize" ] && { echo "${CWARNING}PHP already installed! ${CEND}"; PHP_yn=Other; }
 
 # check if pureftpd has been installed
 [ "$FTP_yn" == 'y' -a -e "$pureftpd_install_dir/sbin/pure-ftpwho" ] && { echo "${CWARNING}Pure-FTPd already installed! ${CEND}"; FTP_yn=Other; }

@@ -27,6 +27,9 @@ sed -i "s@^oneinstack_dir.*@oneinstack_dir=`pwd`@" ./options.conf
 # Check if user is root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
+# add +x to sh in the include files.
+find  /home/vm/oneinstack/include -name "*" | xargs chmod +x
+
 mkdir -p $wwwroot_dir/default $wwwlogs_dir
 [ -d /data ] && chmod 755 /data
 
@@ -80,9 +83,6 @@ if [ "$HHVM_yn" == 'y' ]; then
 fi
 
 # get the IP information
-chmod +x ./include/get_ipaddr.py
-chmod +x ./include/get_public_ipaddr.py
-chmod +x ./include/get_ipaddr_state.py
 IPADDR=`./include/get_ipaddr.py`
 PUBLIC_IPADDR=`./include/get_public_ipaddr.py`
 IPADDR_COUNTRY_ISP=`./include/get_ipaddr_state.py $PUBLIC_IPADDR`

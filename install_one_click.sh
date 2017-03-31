@@ -28,7 +28,7 @@ sed -i "s@^oneinstack_dir.*@oneinstack_dir=`pwd`@" ./options.conf
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 
 # add +x to sh in the include files.
-find  /home/vm/oneinstack/include -name "*" | xargs chmod +x
+find  ./include -name "*" | xargs chmod +x
 
 mkdir -p $wwwroot_dir/default $wwwlogs_dir
 [ -d /data ] && chmod 755 /data

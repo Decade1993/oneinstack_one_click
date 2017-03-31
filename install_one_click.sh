@@ -80,6 +80,9 @@ if [ "$HHVM_yn" == 'y' ]; then
 fi
 
 # get the IP information
+chmod +x ./include/get_ipaddr.py
+chmod +x ./include/get_public_ipaddr.py
+chmod +x ./include/get_ipaddr_state.py
 IPADDR=`./include/get_ipaddr.py`
 PUBLIC_IPADDR=`./include/get_public_ipaddr.py`
 IPADDR_COUNTRY_ISP=`./include/get_ipaddr_state.py $PUBLIC_IPADDR`
